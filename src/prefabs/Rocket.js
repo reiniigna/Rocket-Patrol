@@ -9,13 +9,13 @@ class Rocket extends Phaser.GameObjects.Sprite {
         this.laserframe = 0;                // laser frame counter
         this.moveSpeed = 2;                 // pixels per frame
         this.sfxRocket = scene.sound.add('sfx_rocket');  //add rocket sfx
-        this.sfxLaser = scene.sound.add('sfx_laser');  //add rocket sfx
+        //this.sfxLaser = scene.sound.add('sfx_laser');  //add rocket sfx
         this.p1state = false;
     }
 
 
     update() {
-        // left/right movement
+
         if(!this.isFiring) {
             if(keyLEFT.isDown && this.x >= borderUISize + this.width) {
                 this.x -= this.moveSpeed;
@@ -28,10 +28,9 @@ class Rocket extends Phaser.GameObjects.Sprite {
         // ************ ROCKET STUFF ************
         // fire button
         if(Phaser.Input.Keyboard.JustDown(keyF) && !this.isFiring) {
-            this.isFiring = true;
             this.sfxRocket.play();  //play sfx
-            
-            this.p1state =! this.p1state;
+
+            this.isFiring = true;
         }
 
         // if fired, move up
@@ -46,12 +45,13 @@ class Rocket extends Phaser.GameObjects.Sprite {
 
         // ************ LASER STUFF ************
         // fire button
-        if(Phaser.Input.Keyboard.JustDown(keySPACE) && !this.isFiring2) {
-            this.isFiring2 = true;
-            this.sfxLaser.play();  //play sfx
-            this.laserframe += 1;
-            
-        }
+        //if(Phaser.Input.Keyboard.JustDown(keySPACE) && !this.isFiring2) {
+        //    this.sfxLaser.play();  //play sfx
+
+        //    this.isFiring2 = true;
+        //    this.laserframe += 1;
+        //}
+        
 
 
     }
@@ -59,5 +59,6 @@ class Rocket extends Phaser.GameObjects.Sprite {
     reset() {
         this.isFiring = false;
         this.y = game.config.height - borderUISize - borderPadding;
+        this.p1state =! this.p1state;
     }
 }

@@ -9,14 +9,17 @@ class Menu extends Phaser.Scene {
         this.load.audio('sfx_explosion', './assets/explosion38.wav');
         this.load.audio('sfx_rocket', './assets/rocket_shot.wav');
         this.load.audio('sfx_laser', './assets/laser_shot.wav');
+        this.load.image('background', './assets/titlebackground.png');
+        this.load.text('font', './assets/Komika_display.ttf');
+
     }
 
     create() {
         let menuConfig = {
-            fontFamily: 'Courier',
+            fontFamily: 'font1',
             fontSize: '28px',
-            backgroundColor: '#F3B141',
-            color: '#843605',
+            backgroundColor: '#b603fc',
+            color: '#0ff7f0',
             align: 'right',
             padding: {
                 top: 5,
@@ -24,13 +27,30 @@ class Menu extends Phaser.Scene {
             },
             fixedWidth: 0
         }
+
+        let menuConfig1 = {
+          fontFamily: 'font1',
+          fontSize: '60px',
+          backgroundColor: '#b603fc',
+          color: '#0ff7f0',
+          align: 'right',
+          padding: {
+              top: 5,
+              bottom: 5,
+          },
+          fixedWidth: 0
+      }
+        
+        this.add.image(330, 250,'background');
         this.add.text(game.config.width/2, game.config.height/2 - borderUISize - 
-        borderPadding, 'ROCKET PATROL', menuConfig).setOrigin(0.5);
-        this.add.text(game.config.width/2, game.config.height/2, 'Use <--> arrows to move & (F) to fire', menuConfig).setOrigin(0.5);
-        menuConfig.backgroundColor = '#00FF00';
-        menuConfig.color = '#000';
+        borderPadding, ' ROCKET PATROL ', menuConfig1).setOrigin(0.5, 2.5);
+        this.add.text(game.config.width/2, game.config.height/2, '<--> = move, (F) = fire, (SPACE) = LASER!', menuConfig).setOrigin(0.5, -3.5);
+        menuConfig.backgroundColor = '#b603fc';
+        menuConfig.color = '#0ff7f0';
         this.add.text(game.config.width/2, game.config.height/2 + borderUISize + 
-        borderPadding, 'Press <- for Novice or -> for Expert', menuConfig).setOrigin(0.5);
+        borderPadding, 'Press <- for Novice or -> for Expert', menuConfig).setOrigin(0.5, -3.5);
+        
+        
 
         // define keys
         keyLEFT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.LEFT);
