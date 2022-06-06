@@ -11,6 +11,7 @@ class Play extends Phaser.Scene {
         this.load.image('laser', './assets/lasar.png')
         this.load.image('starfield', './assets/starfield.png');
         this.load.image('devil', './assets/devilship.png');
+        this.load.image('galaxy', './assets/galaxy.png');
 
         //load spritesheets
         this.load.spritesheet('explosion', './assets/explosion.png', {frameWidth: 64, frameHeight: 32, startFrame: 0, endFrame: 9});
@@ -22,7 +23,8 @@ class Play extends Phaser.Scene {
         this.starfield = this.add.tileSprite(0, 0, 640, 480, 'starfield').setOrigin(0, 0);
 
         // green UI background (removed because ugly :D)
-        //this.add.rectangle(0, borderUISize + borderPadding, game.config.width, borderUISize * 2, 0x00FF00).setOrigin(0, 0);
+        //this.add.image(0, borderUISize + borderPadding, game.config.width, borderUISize * 2, 0x00FF00).setOrigin(0, 0);
+        this.add.image(300, -140,'galaxy');
 
         // white borders
         //this.add.rectangle(0, 0, game.config.width, borderUISize, 0xFFFFFF).setOrigin(0,0);
@@ -36,9 +38,9 @@ class Play extends Phaser.Scene {
 
 
         // add spaceships (x3)
-        this.ship01 = new Spaceship(this, game.config.width + borderUISize*6, borderUISize*4, 'devil', 0, 30).setOrigin(0,0);
-        this.ship02 = new Spaceship(this, game.config.width + borderUISize*3, borderUISize*5 + borderPadding*2, 'devil', 0, 20).setOrigin(0,0);
-        this.ship03 = new Spaceship(this, game.config.width + borderUISize*6, borderPadding*4, 'devil', 0, 40).setOrigin(0,0);
+        this.ship01 = new Spaceship(this, game.config.width + borderUISize*6, borderUISize*4, 'devil', 0, 30).setOrigin(0,-.8);
+        this.ship02 = new Spaceship(this, game.config.width + borderUISize*3, borderUISize*5 + borderPadding*2, 'devil', 0, 20).setOrigin(0,-.8);
+        this.ship03 = new Spaceship(this, game.config.width + borderUISize*6, borderPadding*4, 'devil', 0, 40).setOrigin(0,-.8);
 
         // define keys
         keyF = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.F);
@@ -100,11 +102,10 @@ class Play extends Phaser.Scene {
         scoreConfig).setOrigin(0.5);
             this.gameOver = true;
         }, null, this);
-
+        
     }
 
     update() {
-    
     // check key input for restart when game over
     if (this.gameOver && Phaser.Input.Keyboard.JustDown(keyR)) {
         this.scene.restart();
